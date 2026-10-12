@@ -1,6 +1,8 @@
+import { Suspense } from "react";
 import Link from "next/link";
+import { SectionLinks, SectionNavigation } from "@/components/layout/SectionNavigation";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
-import { site } from "@/content/site";
+import { site } from "@/lib/content";
 
 export function Navbar() {
   return (
@@ -14,18 +16,19 @@ export function Navbar() {
           <span aria-hidden="true" className="size-2 rounded-full bg-accent" />
           {site.name}
         </Link>
-        <nav aria-label={site.navigationLabel} className="order-3 col-span-2 sm:order-none sm:col-span-1">
-          <ul className="flex items-center justify-between gap-4 sm:gap-6">
-            {site.navigation.map((link) => (
-              <li key={link.href}>
-                <Link href={link.href} className="inline-flex min-h-11 min-w-11 items-center justify-center font-mono text-xs text-muted transition-colors hover:text-foreground motion-reduce:transition-none">
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
-        <ThemeToggle />
+        <Suspense fallback={<SectionLinks label={site.navigationLabel} links={site.navigation} />}>
+          <SectionNavigation label={site.navigationLabel} links={site.navigation} />
+        </Suspense>
+        <div className="flex items-center gap-3">
+          <a
+            href={site.cv.href}
+            download
+            className="hidden min-h-11 items-center justify-center rounded-sm border border-border px-4 font-mono text-xs text-foreground transition-colors hover:border-focus hover:bg-surface motion-reduce:transition-none md:inline-flex"
+          >
+            {site.cv.label}
+          </a>
+          <ThemeToggle labels={site.theme} />
+        </div>
       </div>
     </header>
   );

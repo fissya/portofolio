@@ -87,3 +87,62 @@
 [data-theme="light"] .theme-when-dark {
   display: none;
 }
+
+/* Keep words visible immediately, including during a preference change. */
+@media (prefers-reduced-motion: reduce) {
+  [data-hero-word] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+.project-card {
+  transition: transform 200ms ease, border-color 200ms ease;
+}
+
+.project-card:focus-within {
+  border-color: var(--accent);
+}
+
+.project-card-spotlight {
+  display: none;
+  opacity: 0;
+  background: radial-gradient(
+    320px circle at var(--spotlight-x, 50%) var(--spotlight-y, 50%),
+    color-mix(in srgb, var(--accent) 12%, transparent),
+    transparent 70%
+  );
+  transition: opacity 200ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .project-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent);
+  }
+}
+
+@media (min-width: 64rem) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .project-card-spotlight {
+    display: block;
+  }
+
+  .project-card:hover .project-card-spotlight {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-card {
+    transition: none;
+  }
+
+  .project-card:hover {
+    transform: none;
+  }
+
+  .project-card-spotlight {
+    display: none;
+    transition: none;
+  }
+}

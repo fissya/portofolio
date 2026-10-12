@@ -1,7 +1,7 @@
 "use client";
 
 import { useLayoutEffect } from "react";
-import { site } from "@/content/site";
+import type { Site } from "@/lib/content";
 import {
   applyTheme,
   DEFAULT_THEME,
@@ -11,7 +11,11 @@ import {
   THEME_STORAGE_KEY,
 } from "@/lib/theme";
 
-export function ThemeToggle() {
+type ThemeToggleProps = {
+  labels: Site["theme"];
+};
+
+export function ThemeToggle({ labels }: ThemeToggleProps) {
   useLayoutEffect(() => {
     // Reapply on the development Strict Mode remount, before paint.
     applyTheme(readStoredTheme() ?? DEFAULT_THEME);
@@ -42,8 +46,8 @@ export function ThemeToggle() {
       onClick={toggleTheme}
       className="flex size-11 shrink-0 cursor-pointer items-center justify-center rounded-full border border-border bg-surface text-foreground transition-colors hover:border-focus motion-reduce:transition-none"
     >
-      <span className="theme-when-dark sr-only">{site.theme.activateLight}</span>
-      <span className="theme-when-light sr-only">{site.theme.activateDark}</span>
+      <span className="theme-when-dark sr-only">{labels.activateLight}</span>
+      <span className="theme-when-light sr-only">{labels.activateDark}</span>
       <svg className="theme-when-dark size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" aria-hidden="true">
         <circle cx="12" cy="12" r="4" />
         <path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" />
