@@ -1,26 +1,89 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* Dark Editorial Tech: dark also works without JavaScript. */
+:root,
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --background: #0b0b0f;
+  --surface: #14141a;
+  --border: #23232c;
+  --foreground: #f4f4f5;
+  --muted: #a1a1aa;
+  --accent: #c8ff3d;
+  --accent-foreground: #0b0b0f;
+  --accent-text: #c8ff3d;
+  --focus: #c8ff3d;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+  --background: #fafaf7;
+  --surface: #f0f0eb;
+  --border: #d5d5df;
+  --foreground: #18181b;
+  --muted: #5c5c69;
+  --accent: #c8ff3d;
+  --accent-foreground: #0b0b0f;
+  /* Darker lime for readable text and focus rings on light surfaces. */
+  --accent-text: #426000;
+  --focus: #426000;
 }
 
 @theme inline {
   --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-border: var(--border);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent-text: var(--accent-text);
+  --color-focus: var(--focus);
+  --font-sans: var(--font-inter);
+  --font-heading: var(--font-space-grotesk);
+  --font-mono: var(--font-jetbrains-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-inter), Arial, sans-serif;
+  }
+
+  ::selection {
+    background: var(--accent);
+    color: var(--accent-foreground);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 4px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Keep icons and accessible action labels correct before hydration. */
+[data-theme="dark"] .theme-when-light,
+[data-theme="light"] .theme-when-dark {
+  display: none;
 }
