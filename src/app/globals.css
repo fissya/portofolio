@@ -100,6 +100,63 @@
   transition: transform 200ms ease, border-color 200ms ease;
 }
 
+.skill-marquee-track {
+  display: flex;
+  width: max-content;
+}
+
+.skill-marquee-group {
+  display: flex;
+  width: max(72rem, 100vw);
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: space-around;
+  gap: 2rem;
+  padding-inline: 1rem;
+}
+
+@keyframes skill-marquee-scroll {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .skill-marquee-track {
+    animation: skill-marquee-scroll 40s linear infinite;
+  }
+}
+
+.skill-marquee[data-paused="true"] .skill-marquee-track {
+  animation-play-state: paused;
+}
+
+@media (hover: hover) {
+  .skill-marquee:hover .skill-marquee-track {
+    animation-play-state: paused;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skill-marquee-track {
+    width: 100%;
+    animation: none;
+    transform: none;
+  }
+
+  .skill-marquee-group {
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem 1.5rem;
+  }
+
+  .skill-marquee-copy,
+  .skill-marquee-control {
+    display: none;
+  }
+}
+
 .project-card:focus-within {
   border-color: var(--accent);
 }

@@ -36,6 +36,31 @@ export const siteSchema = z.strictObject({
   githubUrl: httpsUrlSchema,
   linkedinUrl: httpsUrlSchema,
   skills: z.array(textSchema).min(1, "Isi setidaknya satu skill."),
+  education: z.array(z.strictObject({
+    id: slugSchema,
+    period: textSchema,
+    degree: textSchema,
+    institution: textSchema,
+    description: textSchema,
+    placeholder: z.literal(true),
+  })).min(1),
+  aboutUi: z.strictObject({
+    sectionId: slugSchema,
+    skillsTitle: textSchema,
+    educationTitle: textSchema,
+  }),
+  contactUi: z.strictObject({
+    sectionId: slugSchema,
+    emailLabel: textSchema,
+    githubLabel: textSchema,
+    linkedinLabel: textSchema,
+    cvNotice: textSchema,
+  }),
+  marquee: z.strictObject({
+    label: textSchema,
+    pauseLabel: textSchema,
+    resumeLabel: textSchema,
+  }),
   homeHref: internalHrefSchema,
   topId: slugSchema,
   metadata: z.strictObject({
@@ -50,7 +75,20 @@ export const siteSchema = z.strictObject({
       sectionId: slugSchema,
     }),
   ).min(1),
-  cv: internalLinkSchema,
+  cv: z.strictObject({
+    label: textSchema,
+    href: internalHrefSchema,
+    document: z.strictObject({
+      title: textSchema,
+      badge: textSchema,
+      notice: textSchema,
+      bioTitle: textSchema,
+      skillsTitle: textSchema,
+      educationTitle: textSchema,
+      contactTitle: textSchema,
+      footer: textSchema,
+    }),
+  }),
   accessibility: z.strictObject({
     mainId: slugSchema,
     skipLink: internalLinkSchema,

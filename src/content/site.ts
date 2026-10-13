@@ -15,6 +15,41 @@ export const site = {
   githubUrl: "https://github.com/nama-kamu",
   linkedinUrl: "https://www.linkedin.com/in/nama-kamu",
   skills: ["SQL", "Analisis Sistem", "Next.js", "UI/UX", "Excel/BI"],
+  education: [
+    {
+      id: "sarjana-sistem-informasi",
+      period: "20XX - Sekarang",
+      degree: "S1 Sistem Informasi",
+      institution: "Nama Universitas",
+      description: "Placeholder untuk pendidikan saat ini. Ganti dengan kampus dan periode studi kamu.",
+      placeholder: true,
+    },
+    {
+      id: "sekolah-menengah",
+      period: "20XX - 20XX",
+      degree: "SMA / Sederajat",
+      institution: "Nama Sekolah",
+      description: "Placeholder untuk pendidikan sebelumnya. Ganti dengan sekolah dan tahun kelulusan kamu.",
+      placeholder: true,
+    },
+  ],
+  aboutUi: {
+    sectionId: "tentang",
+    skillsTitle: "Keahlian",
+    educationTitle: "Pendidikan",
+  },
+  contactUi: {
+    sectionId: "kontak",
+    emailLabel: "Email",
+    githubLabel: "GitHub",
+    linkedinLabel: "LinkedIn",
+    cvNotice: "PDF ini masih berupa CV placeholder. Ganti dengan CV kamu sebelum melamar magang atau kerja.",
+  },
+  marquee: {
+    label: "Daftar keahlian",
+    pauseLabel: "Jeda animasi keahlian",
+    resumeLabel: "Lanjutkan animasi keahlian",
+  },
   homeHref: "/",
   topId: "atas",
   metadata: {
@@ -28,7 +63,20 @@ export const site = {
     { label: "Tentang", href: "/#tentang", sectionId: "tentang" },
     { label: "Kontak", href: "/#kontak", sectionId: "kontak" },
   ],
-  cv: { label: "Unduh CV", href: "/cv.pdf" },
+  cv: {
+    label: "Unduh CV",
+    href: "/cv.pdf",
+    document: {
+      title: "Curriculum Vitae",
+      badge: "PLACEHOLDER",
+      notice: "Dokumen ini adalah contoh CV. Semua informasi identitas, pendidikan, dan kontak harus diganti sebelum digunakan untuk melamar.",
+      bioTitle: "Profil singkat",
+      skillsTitle: "Keahlian",
+      educationTitle: "Pendidikan",
+      contactTitle: "Kontak",
+      footer: "CV placeholder - belum mewakili riwayat atau kualifikasi nyata.",
+    },
+  },
   accessibility: {
     mainId: "konten-utama",
     skipLink: { label: "Lewati ke konten utama", href: "#konten-utama" },
